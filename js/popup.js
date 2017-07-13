@@ -20,8 +20,8 @@ $('#complie').click(function(){
   $.ajax({
     url: COMPLIER,
     headers: {
-      'Content-Type':'application/json',
-      'X-XSRF-TOKEN':X_XSRF_TOKEN
+      'Content-Type': 'application/json',
+      'X-XSRF-TOKEN': X_XSRF_TOKEN
     },
     method: 'POST',
     data: JSON.stringify(data),
@@ -32,4 +32,10 @@ $('#complie').click(function(){
       COMPLIE_BTN.removeAttr('disabled');
     }
   });
+  /*editor.getSession().setAnnotations([{
+	row: 1,
+	column: 0,
+	text: "Error Message", // Or the Json reply from the parser 
+	type: "error" // also warning and information
+  }]);*/
 });
