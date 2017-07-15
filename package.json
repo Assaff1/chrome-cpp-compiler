@@ -1,0 +1,23 @@
+{
+  "name": "cpp-complie-extension",
+  "version": "1.0.0",
+  "description": "C++ complie extension with ReactJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HadesD/Chrome-Cpp-Complier.git"
+  },
+  "author": "Dark.Hades",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HadesD/Chrome-Cpp-Complier/issues"
+  },
+  "homepage": "https://github.com/HadesD/Chrome-Cpp-Complier#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1"
+  }
+}
