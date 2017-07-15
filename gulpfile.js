@@ -20,7 +20,7 @@ gulp.task('css', function(){
 
 gulp.task('js', function(){
   gulp.src(paths.js, {cwd: bases.app})
-    .pipe(concat('app.js'))
+    .pipe(concat('popup.js'))
     .pipe(gulp.dest(bases.dist + 'js'));
 });
 
