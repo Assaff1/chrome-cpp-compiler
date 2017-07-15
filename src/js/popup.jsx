@@ -12,5 +12,5 @@ class ComplieButton extends React.Component
 
 ReactDOM.render(
   <ComplieButton />,
-  doctument.getElementById('complie-btn');
+  document.getElementById('complie-btn')
 );
