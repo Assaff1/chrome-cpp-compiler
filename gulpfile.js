@@ -1,14 +1,17 @@
-var gulp = require('gulp');
+var gulp   = require('gulp');
 var concat = require('gulp-concat');
+var babel  = require('gulp-babel');
 
 var bases = {
   app: 'app/',
   dist: 'dist/',
+  vendor: 'dist/vendor',
 };
 
 var paths = {
-  js: ['js/*.js'],
-  css: ['css/*.css'],
+  js:     ['js/*.js'],
+  jsx:    ['js/components/*.jsx'],
+  css:    ['css/*.css'],
   jslibs: ['js/**/*.js', '!js/*.js']
 }
 
@@ -21,6 +24,15 @@ gulp.task('css', function(){
 gulp.task('js', function(){
   gulp.src(paths.js, {cwd: bases.app})
     .pipe(concat('popup.js'))
+    .pipe(gulp.dest(bases.dist + 'js'));
+});
+
+gulp.task('babel', function(){
+  gulp.src(paths.jsx)
+    .pipe(babel({
+      plugins: ['transform-react-jsx']
+    }))
+    .pipe(concat('app.js'))
     .pipe(gulp.dest(bases.dist + 'js'));
 });
 
@@ -40,10 +52,20 @@ gulp.task('copy', function(){
   // Copy JS Libraries
   gulp.src(paths.jslibs, {cwd: bases.app + '**'})
     .pipe(gulp.dest(bases.dist));
+
+  // Copy React
+  gulp.src('react/dist/react.min.js', {cwd: 'node_modules/'})
+    .pipe(gulp.dest(bases.vendor));
+  gulp.src('react-dom/dist/react-dom.min.js', {cwd: 'node_modules/'})
+    .pipe(gulp.dest(bases.vendor));
+
+  // Copy jQuery
+   gulp.src('jquery/dist/jquery.min.js', {cwd: 'node_modules/'})
+    .pipe(gulp.dest(bases.vendor));
 });
 
 gulp.task('watch', function(){
-  gulp.watch(bases.app + '**/*', ['css', 'js', 'copy']);
+  gulp.watch(bases.app + '**/**/*', ['css', 'js', 'babel', 'copy']);
   //gulp.watch([''], ['']);
 });
 

@@ -17,7 +17,12 @@
   },
   "homepage": "https://github.com/HadesD/Chrome-Cpp-Complier#readme",
   "devDependencies": {
+    "babel-plugin-transform-react-jsx": "^6.24.1",
     "gulp": "^3.9.1",
-    "gulp-concat": "^2.6.1"
+    "gulp-babel": "^6.1.2",
+    "gulp-concat": "^2.6.1",
+    "jquery": "^3.2.1",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
   }
 }
