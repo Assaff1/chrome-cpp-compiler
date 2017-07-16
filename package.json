@@ -20,9 +20,12 @@
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
-    "gulp-concat": "^2.6.1",
+    "gulp-concat": "^2.6.1"
+  },
+  "dependencies": {
     "jquery": "^3.2.1",
     "react": "^15.6.1",
+    "react-ace": "^5.1.0",
     "react-dom": "^15.6.1"
   }
 }
