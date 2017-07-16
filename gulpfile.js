@@ -62,6 +62,11 @@ gulp.task('copy', function(){
   // Copy jQuery
    gulp.src('jquery/dist/jquery.min.js', {cwd: 'node_modules/'})
     .pipe(gulp.dest(bases.vendor));
+
+  // Copy jQuery
+   gulp.src('react-ace/dist/react-ace.min.js', {cwd: 'node_modules/'})
+    .pipe(gulp.dest(bases.vendor));
+
 });
 
 gulp.task('watch', function(){
