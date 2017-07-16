@@ -1,0 +1,14 @@
+import ComplieButton from './components/ComplieBtn.jsx';
+import Editor from './components/Editor.jsx';
+
+class App extends React.Component
+{
+
+}
+
+ReactDOM.render(
+  <ComplieButton />
+  <Editor />,
+  document.getElementById('root')
+);
+
