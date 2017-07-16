@@ -1,9 +1,11 @@
-var gulp   = require('gulp');
-var concat = require('gulp-concat');
-var babel  = require('gulp-babel');
+const gulp   = require('gulp');
+const concat = require('gulp-concat');
+const babel  = require('gulp-babel');
+const webpack = require('webpack');
+const path = require('path');
 
 var bases = {
-  app: 'app/',
+  app: 'src/',
   dist: 'dist/',
   vendor: 'dist/vendor',
 };
@@ -27,13 +29,45 @@ gulp.task('js', function(){
     .pipe(gulp.dest(bases.dist + 'js'));
 });
 
-gulp.task('babel', function(){
-  gulp.src(paths.jsx, {cwd: bases.app})
-    .pipe(babel({
-      plugins: ['transform-react-jsx']
-    }))
-    .pipe(concat('app.js'))
-    .pipe(gulp.dest(bases.dist + 'js'));
+gulp.task('jsx', function(){
+  var plugins = [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development')
+    })
+  ];
+
+  webpack({
+    plugins: plugins,
+    cache: true,
+    //watch: watch,
+    module: {
+      loaders: [
+        {
+          test: /\.jsx?$/,
+          exclude: /node_modules/,
+          loader: 'babel-loader',
+          query: {
+            presets:['react']
+          }
+        }
+      ]
+    },
+    devtool: "#source-map",
+    entry: path.resolve(__dirname, bases.app + 'js/main.jsx'),
+    output: {
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist/js')
+    }
+  }).run(function(err, stats){
+    console.log(err);
+    //console.log(stats);
+  });
+	// gulp.src(paths.jsx, {cwd: bases.app})
+	//   .pipe(babel({
+  //     plugins: ['transform-react-jsx']
+  //   }))
+  //   .pipe(concat('app.js'))
+  //   .pipe(gulp.dest(bases.dist + 'js'));
 });
 
 gulp.task('copy', function(){
@@ -70,8 +104,8 @@ gulp.task('copy', function(){
 });
 
 gulp.task('watch', function(){
-  gulp.watch(bases.app + '**/**/*', ['css', 'js', 'babel', 'copy']);
+  gulp.watch(bases.app + '**/**/*', ['css', 'js', 'jsx', 'copy']);
   //gulp.watch([''], ['']);
 });
 
-gulp.task('build', ['css', 'js', 'babel', 'copy', 'watch']);
+gulp.task('dev', ['css', 'js', 'jsx', 'copy', 'watch']);
