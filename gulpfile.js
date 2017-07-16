@@ -28,7 +28,7 @@ gulp.task('js', function(){
 });
 
 gulp.task('babel', function(){
-  gulp.src(paths.jsx)
+  gulp.src(paths.jsx, {cwd: bases.app})
     .pipe(babel({
       plugins: ['transform-react-jsx']
     }))
@@ -69,4 +69,4 @@ gulp.task('watch', function(){
   //gulp.watch([''], ['']);
 });
 
-gulp.task('build', ['css', 'js', 'copy', 'watch']);
+gulp.task('build', ['css', 'js', 'babel', 'copy', 'watch']);
