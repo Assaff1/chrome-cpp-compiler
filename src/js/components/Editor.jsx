@@ -8,19 +8,18 @@ import 'brace/theme/monokai';
 
 class Editor extends React.Component
 {
-  onChange(e)
-  {
-
-  }
-
   render()
   {
     return (
       <AceEditor
         mode="c_cpp"
         theme="monokai"
-        onChange={this.onChange}
-        name="UNIQUE_ID_OF_DIV"
+        // onChange={this.onChange}
+        name="code"
+        value={`#include <iostream>\n\nusing namespace std;\n\nint main (void)\n{\n  \n  return 0;\n}`}
+        showPrintMargin={true}
+        showGutter={true}
+        highlightActiveLine={true}
         editorProps={{$blockScrolling: true}}
       />
     );

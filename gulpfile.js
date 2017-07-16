@@ -38,7 +38,7 @@ gulp.task('jsx', function(){
   ];
 
   webpack({
-    plugins: plugins,
+    // plugins: plugins,
     cache: true,
     //watch: watch,
     module: {
@@ -82,18 +82,8 @@ gulp.task('copy', function(){
   gulp.src(paths.jslibs, {cwd: bases.app + '**'})
     .pipe(gulp.dest(bases.dist));
 
-  // Copy React
-  gulp.src('react/dist/react.min.js', {cwd: 'node_modules/'})
-    .pipe(gulp.dest(bases.vendor));
-  gulp.src('react-dom/dist/react-dom.min.js', {cwd: 'node_modules/'})
-    .pipe(gulp.dest(bases.vendor));
-
   // Copy jQuery
    gulp.src('jquery/dist/jquery.min.js', {cwd: 'node_modules/'})
-    .pipe(gulp.dest(bases.vendor));
-
-  // Copy jQuery
-   gulp.src('react-ace/dist/react-ace.min.js', {cwd: 'node_modules/'})
     .pipe(gulp.dest(bases.vendor));
 
 });
