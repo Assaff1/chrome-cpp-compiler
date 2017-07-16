@@ -1,8 +1,9 @@
 const gulp   = require('gulp');
 const concat = require('gulp-concat');
-const babel  = require('gulp-babel');
+// const babel  = require('gulp-babel');
 const webpack = require('webpack');
 const path = require('path');
+const isProduction = true;//require('gulp-');
 
 var bases = {
   app: 'src/',
@@ -32,7 +33,7 @@ gulp.task('js', function(){
 gulp.task('jsx', function(){
   var plugins = [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
+      'process.env.NODE_ENV': JSON.stringify(isProduction ? 'production' : 'development')
     })
   ];
 
@@ -59,15 +60,9 @@ gulp.task('jsx', function(){
       path: path.resolve(__dirname, 'dist/js')
     }
   }).run(function(err, stats){
-    console.log(err);
+    //console.log(err);
     //console.log(stats);
   });
-	// gulp.src(paths.jsx, {cwd: bases.app})
-	//   .pipe(babel({
-  //     plugins: ['transform-react-jsx']
-  //   }))
-  //   .pipe(concat('app.js'))
-  //   .pipe(gulp.dest(bases.dist + 'js'));
 });
 
 gulp.task('copy', function(){
