@@ -1,5 +1,7 @@
 import React from 'react';
 import Editor from './Editor.jsx';
+import $ from 'jquery'
+
 
 class ComplieButton extends React.Component
 {
@@ -12,7 +14,7 @@ class ComplieButton extends React.Component
 
   onClick(e)
   {
-    console.log(this.props.editorValue);
+    this.props.onClick(e);
   }
 
   render()

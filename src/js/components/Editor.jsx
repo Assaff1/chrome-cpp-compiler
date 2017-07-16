@@ -33,6 +33,7 @@ class Editor extends React.Component
         showGutter={true}
         highlightActiveLine={true}
         editorProps={{$blockScrolling: true}}
+        annotations={this.props.annotations}
       />
     );
   }
