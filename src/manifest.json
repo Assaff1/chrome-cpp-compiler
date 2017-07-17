@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "C++ Complier",
-  "description": "This extension complie C++ code directly",
+  "name": "C++ Compiler",
+  "description": "This extension compile C++ code directly",
   "version": "1.0",
 
   "browser_action": {
