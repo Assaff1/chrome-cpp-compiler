@@ -8,6 +8,7 @@ Direct complie c++ code in chrome
 2. Open url `chrome://extensions/` in chrome
 3. Tick <kbd>Developer Mode</kbd>
 4. Click <kbd>Load unpacked extension… </kbd> and choose path of extracted extension.
+5. No 5 here
 
 # Demos
 
