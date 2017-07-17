@@ -25,8 +25,10 @@ class Editor extends React.Component
       <AceEditor
         mode="c_cpp"
         theme="monokai"
-        height="300px"
+        height="250px"
+        width="100%"
         name="code"
+        tabSize={2}
         onChange={this.onChange}
         value={this.props.value}
         showPrintMargin={true}
