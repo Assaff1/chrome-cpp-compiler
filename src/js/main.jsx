@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
-import ComplieButton from './components/ComplieButton.jsx';
+import CompileButton from './components/CompileButton.jsx';
 import Editor from './components/Editor.jsx';
 import BottomBox from './components/BottomBox.jsx';
 
-const COMPLIER_SITE = 'https://paiza.io/api/projects.json';
+const COMPILER_SITE = 'https://paiza.io/api/projects.json';
 var data = {
   project: {
     language: 'cpp',
@@ -35,7 +35,7 @@ class App extends React.Component
     };
 
     this.onChangeEditor = this.onChangeEditor.bind(this);
-    this.onClickComplieButton = this.onClickComplieButton.bind(this);
+    this.onClickCompileButton = this.onClickCompileButton.bind(this);
     this.onChangeSTDIN = this.onChangeSTDIN.bind(this);
   }
 
@@ -48,7 +48,7 @@ class App extends React.Component
     });
   }
 
-  onClickComplieButton(e)
+  onClickCompileButton(e)
   {
     data.project.source_files.push({
       filename: 'Main.cpp',
@@ -56,8 +56,17 @@ class App extends React.Component
     });
     data.project.input = this.state.bottomBox.stdin;
 
+    this.setState({
+      bottomBox: {
+        debug: 'Compiling'
+      }
+    });
+    $('.tab-content > *').hide();
+    $('.content-debug').show();
+    $('.myButton').attr('disabled', 'disabled');
+
     $.ajax({
-      url: COMPLIER_SITE,
+      url: COMPILER_SITE,
       headers: {
         'Content-Type': 'application/json',
       },
@@ -65,7 +74,7 @@ class App extends React.Component
       data: JSON.stringify(data),
       success: function(rs) {
         // console.log(this.state.editor.value);
-        if (rs.build_exit_code !== 0)
+        if (rs.build_exit_code !== 0 || rs.build_stderr !== "")
         {
           var build_errors = rs.build_stderr.split('\n');
           if (build_errors.length < 3)
@@ -92,20 +101,26 @@ class App extends React.Component
                 build_errors[i+1],
                 build_errors[i+2]
               ];
-              annotations.push({
+              /*annotations.push({
                 row: parseInt(err_split[1]),
                 column: parseInt(err_split[2]),
                 type: 'error',
                 text: text.join('\n'),
+              });*/
+              this.setState({
+                editor: {
+                  value: this.state.editor.value,
+                  annotations: [
+                    {
+                      row: parseInt(err_split[1]),
+                      column: parseInt(err_split[2]),
+                      type: 'error',
+                      text: text.join('\n'),
+                    }
+                  ]
+                }
               });
             }
-            /*this.setState({
-              editor: {
-                value: this.state.editor.value,
-                annotations: annotations
-              }
-            });*/
-            console.log(this.state.editor.annotations);
           }
           this.setState({
             bottomBox: {
@@ -117,14 +132,13 @@ class App extends React.Component
         {
           this.setState({
             bottomBox: {
-              debug: rs.stdout
+              debug: [/*rs.stderr, */rs.stdout].join('\n')
             }
           });
         }
       }.bind(this),
       complete: function(rs) {
-        $('.tab-content > *').hide();
-        $('.content-debug').show();
+        $('.myButton').removeAttr('disabled');
       }
     });
 
@@ -153,9 +167,9 @@ class App extends React.Component
           stdin={this.state.bottomBox.stdin}
           onChangeSTDIN={this.onChangeSTDIN}
         />
-        <ComplieButton
+        <CompileButton
           editorValue={this.state.editor.value}
-          onClick={this.onClickComplieButton}
+          onClick={this.onClickCompileButton}
         />
       </div>
     );

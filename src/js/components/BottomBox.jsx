@@ -39,7 +39,7 @@ class BottomBox extends React.Component
       <div className="bottom-box">
         <ul className="tab-nav">
           <li><a name="tab-stdin" onClick={this.onClickTabNav}>STDIN</a></li>
-          <li><a name="tab-debug" onClick={this.onClickTabNav}>Debug</a></li>
+          <li><a name="tab-debug" onClick={this.onClickTabNav}>Result</a></li>
         </ul>
         <div className="tab-content">
           <div className="content-stdin" style={{display: 'block'}}>

@@ -3,7 +3,7 @@ import Editor from './Editor.jsx';
 import $ from 'jquery'
 
 
-class ComplieButton extends React.Component
+class CompileButton extends React.Component
 {
   constructor(props)
   {
@@ -24,10 +24,10 @@ class ComplieButton extends React.Component
         className="myButton"
         onClick={this.onClick}
       >
-        Complie
+        Compile
       </button>
     );
   }
 }
 
-export default ComplieButton;
+export default CompileButton;

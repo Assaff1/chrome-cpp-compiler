@@ -48,6 +48,7 @@ body {
 
 .content-debug {
   padding: 0 5px;
+  overflow-x: auto;
 }
 .myButton {
 	-moz-box-shadow:inset 0px 1px 0px 0px #54a3f7;
@@ -89,4 +90,9 @@ body {
 .myButton:active {
 	position:relative;
 	top:1px;
+}
+.myButton:disabled {
+  background: #eee;
+  box-shadow: none;
+  border: #ccc 1px solid;
 }
