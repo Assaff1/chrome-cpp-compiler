@@ -1,6 +1,6 @@
-# Chrome cpp complier
+# Chrome cpp compiler
 
-Direct complie c++ code in chrome
+Directly compile c++ code in chrome
 
 # Install
 
